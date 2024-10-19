@@ -17,5 +17,6 @@ font-weight: 700;}
     margin: 2em;
 }
 
+#score, #result, #moves {margin-top: 2em;}
 
-
+#reset-btn {margin-top: 2.5em;}
