@@ -1,8 +1,16 @@
 const rockBtn = document.getElementById("rock-btn");
 const paperBtn = document.getElementById("paper-btn");
 const scissorsBtn = document.getElementById("scissors-btn");
+const resetBtn = document.getElementById('reset-btn')
 let computerMove = "";
 let result = "";
+
+const score = {wins: 0,
+    losses: 0,
+    ties: 0
+}
+
+
 
 const playGame = () => {
   const randomNumber = Math.random();
@@ -48,15 +56,27 @@ else
     result = "Tie.";
   }}
 
+if(result === 'You Win.'){
+    score.wins += 1
+}
+else if (result === 'You Lose.')
+{score.losses += 1}
+else{score.ties += 1}
 
-  alert(`You picked ${move}. Computer picked ${computerMove}. ${result}`);
+console.log(score)
+  alert(`You picked ${move}. Computer picked ${computerMove}. ${result}.
+Wins: ${score.wins}. Losses: ${score.losses}. Ties: ${score.ties} .`);
 };
 
-
+const reset = () => {
+    score.wins = 0
+    score.losses = 0
+    score.ties = 0
+}
 
 
 
 rockBtn.addEventListener("click", () => yourMove('Rock'));
 paperBtn.addEventListener("click", () => yourMove('Paper'));
 scissorsBtn.addEventListener("click", () => yourMove('Scissors'));
-
+resetBtn.addEventListener('click', reset)
