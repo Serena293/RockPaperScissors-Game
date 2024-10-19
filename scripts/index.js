@@ -1,15 +1,16 @@
 const rockBtn = document.getElementById("rock-btn");
 const paperBtn = document.getElementById("paper-btn");
 const scissorsBtn = document.getElementById("scissors-btn");
-const resetBtn = document.getElementById('reset-btn')
+const resetBtn = document.getElementById("reset-btn");
 let computerMove = "";
 let result = "";
 
-const score = {wins: 0,
-    losses: 0,
-    ties: 0
-}
-
+const score = JSON.parse(localStorage.getItem("score")) || {
+  wins: 0,
+  losses: 0,
+  ties: 0,
+};
+//Getting the value out of the localStorage when we load the page
 
 
 const playGame = () => {
@@ -28,55 +29,57 @@ const playGame = () => {
 const yourMove = (move) => {
   playGame();
 
-  if(move === 'Rock'){
-  if (computerMove === "Rock") {
-    result = "Tie.";
-  } else if (computerMove === "Paper") {
-    result = "You Lose.";
-  } else {
-    result = "You Win.";
-  }}
- else if(move ==='Paper')
-{
+  if (move === "Rock") {
     if (computerMove === "Rock") {
-        result = "You Win.";
-      } else if (computerMove === "Paper") {
-        result = "Tie.";
-      } else {
-        result = "You Lose.";
-      }
-}
-
-else
-{ if (computerMove === "Rock") {
-    result = "You Lose.";
-  } else if (computerMove === "Paper") {
-    result = "You Win.";
+      result = "Tie.";
+    } else if (computerMove === "Paper") {
+      result = "You Lose.";
+    } else {
+      result = "You Win.";
+    }
+  } else if (move === "Paper") {
+    if (computerMove === "Rock") {
+      result = "You Win.";
+    } else if (computerMove === "Paper") {
+      result = "Tie.";
+    } else {
+      result = "You Lose.";
+    }
   } else {
-    result = "Tie.";
-  }}
+    if (computerMove === "Rock") {
+      result = "You Lose.";
+    } else if (computerMove === "Paper") {
+      result = "You Win.";
+    } else {
+      result = "Tie.";
+    }
+  }
 
-if(result === 'You Win.'){
-    score.wins += 1
-}
-else if (result === 'You Lose.')
-{score.losses += 1}
-else{score.ties += 1}
+  if (result === "You Win.") {
+    score.wins += 1;
+  } else if (result === "You Lose.") {
+    score.losses += 1;
+  } else {
+    score.ties += 1;
+  }
 
-console.log(score)
+  localStorage.setItem("score", JSON.stringify(score));
+  //saving the score inside the localStorage
+  //first sting it is the 'name' we give to what we are putting inside the store
+  //It's what we will use to access the storage
+
   alert(`You picked ${move}. Computer picked ${computerMove}. ${result}.
 Wins: ${score.wins}. Losses: ${score.losses}. Ties: ${score.ties} .`);
 };
 
 const reset = () => {
-    score.wins = 0
-    score.losses = 0
-    score.ties = 0
-}
+  score.wins = 0;
+  score.losses = 0;
+  score.ties = 0;
+  localStorage.setItem("score", JSON.stringify(score));
+};
 
-
-
-rockBtn.addEventListener("click", () => yourMove('Rock'));
-paperBtn.addEventListener("click", () => yourMove('Paper'));
-scissorsBtn.addEventListener("click", () => yourMove('Scissors'));
-resetBtn.addEventListener('click', reset)
+rockBtn.addEventListener("click", () => yourMove("Rock"));
+paperBtn.addEventListener("click", () => yourMove("Paper"));
+scissorsBtn.addEventListener("click", () => yourMove("Scissors"));
+resetBtn.addEventListener("click", reset);
