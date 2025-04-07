@@ -11,25 +11,32 @@ h1 {
   margin-bottom: 2em;
   font-weight: 700;
 }
-.move-btn{
-    background-color: transparent;
-    border-radius: 50%;
-    margin: 1em;
-    border-color: white;
+
+.move-btn {
+  background-color: transparent;
+  border-radius: 50%;
+  margin: 1em;
+  border-color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
+
+.move-btn:hover {
+  transform: scale(1.1);
+}
+
 img {
-    height: 10vh;
+  height: 10vh;
   width: 10vh;
-  margin: 2em;}
- 
+  margin: 2em;
+}
 
 #score,
 #result,
 #moves {
   margin-top: 2em;
   font-size: 25px;
-  font-weight:  700;
-
+  font-weight: 700;
 }
 
 #reset-btn {
@@ -37,10 +44,16 @@ img {
   background-color: white;
   border: none;
   padding: 1em 2em;
-
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-p img { height: 8vh;
-width: 8vh;
-margin: 0;
+#reset-btn:hover {
+  background-color: #e0e0e0;
+}
+
+p img {
+  height: 8vh;
+  width: 8vh;
+  margin: 0;
 }

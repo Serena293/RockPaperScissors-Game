@@ -14,7 +14,6 @@ const score = JSON.parse(localStorage.getItem("score")) || {
   losses: 0,
   ties: 0,
 };
-//Getting the value out of the localStorage when we load the page
 
 const updateScore = () => {
   scoreParagraph.innerHTML = `
@@ -24,12 +23,12 @@ const updateScore = () => {
 const playGame = () => {
   const randomNumber = Math.random();
 
-  if (randomNumber > 0 && randomNumber < 1 / 3) {
-    computerMove = "Rock";
-  } else if (randomNumber > 1 / 3 && randomNumber < 2 / 3) {
-    computerMove = "Paper";
+  if (randomNumber >= 0 && randomNumber < 1 / 3) {
+    computerMove = "rock";
+  } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+    computerMove = "paper";
   } else {
-    computerMove = "Scissors";
+    computerMove = "scissors";
   }
   return computerMove;
 };
@@ -37,26 +36,26 @@ const playGame = () => {
 const yourMove = (move) => {
   playGame();
 
-  if (move === "Rock") {
-    if (computerMove === "Rock") {
+  if (move === "rock") {
+    if (computerMove === "rock") {
       result = "Tie.";
-    } else if (computerMove === "Paper") {
+    } else if (computerMove === "paper") {
       result = "You Lose.";
     } else {
       result = "You Win.";
     }
-  } else if (move === "Paper") {
-    if (computerMove === "Rock") {
+  } else if (move === "paper") {
+    if (computerMove === "rock") {
       result = "You Win.";
-    } else if (computerMove === "Paper") {
+    } else if (computerMove === "paper") {
       result = "Tie.";
     } else {
       result = "You Lose.";
     }
   } else {
-    if (computerMove === "Rock") {
+    if (computerMove === "rock") {
       result = "You Lose.";
-    } else if (computerMove === "Paper") {
+    } else if (computerMove === "paper") {
       result = "You Win.";
     } else {
       result = "Tie.";
@@ -70,14 +69,12 @@ const yourMove = (move) => {
   } else {
     score.ties += 1;
   }
+  
   updateScore();
   resultParagraph.innerHTML = result;
   movesParagraph.innerHTML = `You <img src="./assets/img/${move}-emoji.png" alt="${move}-emoji" > Computer <img src="./assets/img/${computerMove}-emoji.png" alt="${computerMove}-emoji" >`;
 
   localStorage.setItem("score", JSON.stringify(score));
-  //saving the score inside the localStorage
-  //first sting it is the 'name' we give to what we are putting inside the store
-  //It's what we will use to access the storage
 };
 
 const reset = () => {
@@ -86,10 +83,12 @@ const reset = () => {
   score.ties = 0;
   localStorage.setItem("score", JSON.stringify(score));
   updateScore();
+  resultParagraph.innerHTML = "";
+  movesParagraph.innerHTML = "";
 };
 
 updateScore();
-rockBtn.addEventListener("click", () => yourMove("Rock"));
-paperBtn.addEventListener("click", () => yourMove("Paper"));
-scissorsBtn.addEventListener("click", () => yourMove("Scissors"));
+rockBtn.addEventListener("click", () => yourMove("rock"));
+paperBtn.addEventListener("click", () => yourMove("paper"));
+scissorsBtn.addEventListener("click", () => yourMove("scissors"));
 resetBtn.addEventListener("click", reset);
